@@ -1,0 +1,22 @@
+Pico64 Keyboard
+Copyright (c) 2026 Martin Oswald (do2mad, https://1mhz.de)
+
+Firmware: MIT License (LICENSE). Hardware: CC BY-NC-SA 4.0 (LICENSE-HARDWARE.md).
+
+Third-party components (not part of this repository, pulled in by the build):
+
+- Raspberry Pi Pico SDK - Copyright (c) Raspberry Pi (Trading) Ltd., BSD-3-Clause
+  https://github.com/raspberrypi/pico-sdk
+  firmware/pico_sdk_import.cmake is an unmodified copy from the SDK.
+  firmware/btstack_config.h is based on the pico-examples configuration (BSD-3-Clause).
+- BTstack - Copyright (c) BlueKitchen GmbH. Licensed for use on Raspberry Pi RP2040/RP2350
+  based devices through Raspberry Pi, see the BTstack license in the Pico SDK.
+  https://github.com/bluekitchen/btstack
+- CYW43 driver - Copyright (c) Damien P. George / Raspberry Pi. Licensed for use with
+  Raspberry Pi RP2040/RP2350 based devices, see its LICENSE in the Pico SDK.
+
+The Bluetooth service is compatible with the BLE keyboard extension for the BT-64 / Blue-64
+firmware (https://github.com/sideprojectslab/BT-64, Apache-2.0, SideProjectsLab). No code of
+BT-64 is included.
+
+Commodore and Commodore 64 are trademarks of their respective owners.

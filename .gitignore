@@ -1,0 +1,12 @@
+build/
+firmware/build/
+firmware/bin/
+*.uf2
+.DS_Store
+.vscode/
+# KiCad backups and local files
+hardware/**/*-backups/
+hardware/**/*.kicad_prl
+hardware/**/fp-info-cache
+hardware/**/_autosave-*
+hardware/**/*.lck
