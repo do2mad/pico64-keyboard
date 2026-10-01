@@ -6,6 +6,8 @@ Ein kleiner Adapter, der aus einem **Raspberry Pi Pico 2 W** eine kabellose Tast
 **Commodore 64** macht – bedient vom Handy mit der
 [Blue-64-Keyboard-App](https://github.com/do2mad/blue64-keyboard-ios) (iPhone und Android).
 
+**App bekommen:** iPhone – [TestFlight-Beta](https://testflight.apple.com/join/jEn4tsP7) · Android – [APK im neuesten Release](https://github.com/do2mad/blue64-keyboard-ios/releases/latest)
+
 Der Pico wird zwischen C64-Mainboard und Tastaturkabel gesteckt und bildet die Tastaturmatrix in
 Software nach. Außer dem Pico braucht es nur **17 Widerstände und eine Diode** – keine
 Pegelwandler und kein Koppelfeld-Chip, denn GPIO 0–25 des RP2350 sind 5-V-tolerant.

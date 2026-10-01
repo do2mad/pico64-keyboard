@@ -6,6 +6,8 @@ A tiny adapter that turns a **Raspberry Pi Pico 2 W** into a wireless keyboard f
 **Commodore 64** – controlled from your phone with the
 [Blue-64 Keyboard app](https://github.com/do2mad/blue64-keyboard-ios) (iPhone and Android).
 
+**Get the app:** iPhone – [TestFlight beta](https://testflight.apple.com/join/jEn4tsP7) · Android – [APK in the latest release](https://github.com/do2mad/blue64-keyboard-ios/releases/latest)
+
 The Pico plugs in between the C64 mainboard and the keyboard cable and emulates the keyboard
 matrix in software. Apart from the Pico you only need **17 resistors and one diode** – no level
 shifters and no crosspoint switch, because GPIO 0–25 of the RP2350 are 5 V tolerant.
