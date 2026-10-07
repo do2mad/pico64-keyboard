@@ -1,7 +1,7 @@
 # Hardware (KiCad)
 
 A PCB for Pico64 Keyboard is being designed in KiCad: the Pico 2 W lies flat, resistor networks
-instead of single resistors, a 1 × 20 pass-through for CN1, so the adapter fits under the case top.
+(2 × 8 × 100 Ω) instead of single resistors, a 1 × 20 pass-through for CN1, so the adapter fits under the case top.
 
 Until then the adapter can be built on perfboard – wiring, parts list and safety notes are in
 [../docs/HARDWARE.md](../docs/HARDWARE.md).

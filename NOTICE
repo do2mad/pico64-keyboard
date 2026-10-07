@@ -8,10 +8,15 @@ Third-party components (not part of this repository, pulled in by the build):
 - Raspberry Pi Pico SDK - Copyright (c) Raspberry Pi (Trading) Ltd., BSD-3-Clause
   https://github.com/raspberrypi/pico-sdk
   firmware/pico_sdk_import.cmake is an unmodified copy from the SDK.
-  firmware/btstack_config.h is based on the pico-examples configuration (BSD-3-Clause).
+  firmware/btstack_config.h is based on the pico-examples configuration (BSD-3-Clause),
+  as adapted in the Bluepad32 Pico W example.
 - BTstack - Copyright (c) BlueKitchen GmbH. Licensed for use on Raspberry Pi RP2040/RP2350
   based devices through Raspberry Pi, see the BTstack license in the Pico SDK.
   https://github.com/bluekitchen/btstack
+- Bluepad32 - Copyright (c) Ricardo Quesada, Apache-2.0
+  https://github.com/ricardoquesada/bluepad32
+  Bluetooth keyboard / gamepad support. Downloaded by the build (not included in this
+  repository); firmware/sdkconfig.h follows its Pico W example (public domain).
 - CYW43 driver - Copyright (c) Damien P. George / Raspberry Pi. Licensed for use with
   Raspberry Pi RP2040/RP2350 based devices, see its LICENSE in the Pico SDK.
 

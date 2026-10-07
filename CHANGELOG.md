@@ -2,6 +2,38 @@
 
 Pico64 Keyboard. Neueste Version zuerst.
 
+## v0.10.0 – 2026-10-01
+
+### Deutsch
+
+- **Bluetooth-Tastaturen** (Classic und BLE) direkt am Pico, ohne App. Zwei Belegungen, F10 schaltet um: symbolisch (deutsches QWERTZ, getippt wird, was aufgedruckt ist) und positionsgleich (für Spiele).
+- **Bluetooth-Gamepads** (z. B. 8BitDo) als **Joystick an Port 1 oder 2**: Steuerkreuz/Stick, A/B = Feuer, X = SPACE, Y = RETURN, Select = RUN/STOP, Start = F1, L1+R1 = Port wechseln. Erstes Gamepad an Port 2.
+- App, Tastatur und Gamepads gleichzeitig; bis zu 4 Bluetooth-Geräte. Gekoppelte Geräte verbinden sich automatisch wieder.
+- USB-Konsole: `!s` Status, `!p` Belegung, `!b` Gerätesuche an/aus, `!x` Kopplungen löschen.
+- Nutzt [Bluepad32](https://github.com/ricardoquesada/bluepad32) (Apache-2.0), wird beim Bauen automatisch geladen.
+- Hardware: **alle 17 Widerstände 100 Ω** – jetzt auch PA0–PA7 (vorher 1 kΩ), nötig für Joystick-Port 2. Stückliste: 2 × 4116R-1-101 + 1 Einzelwiderstand.
+
+### English
+
+- **Bluetooth keyboards** (Classic and BLE) directly on the Pico, no app needed. Two mappings, F10 switches: symbolic (German QWERTZ, types what is printed on the key) and positional (for games).
+- **Bluetooth gamepads** (e.g. 8BitDo) as **joystick in port 1 or 2**: D-pad/stick, A/B = fire, X = SPACE, Y = RETURN, Select = RUN/STOP, Start = F1, L1+R1 = swap port. First gamepad on port 2.
+- App, keyboard and gamepads at the same time; up to 4 Bluetooth devices. Paired devices reconnect automatically.
+- USB console: `!s` status, `!p` mapping, `!b` device search on/off, `!x` forget pairings.
+- Uses [Bluepad32](https://github.com/ricardoquesada/bluepad32) (Apache-2.0), downloaded automatically by the build.
+- Hardware: **all 17 resistors 100 Ω** – now PA0–PA7 too (were 1 kΩ), needed for joystick port 2. Parts: 2 × 4116R-1-101 + 1 single resistor.
+
+## v0.9.1 – 2026-10-01
+
+### Deutsch
+
+- Hardware: Widerstände in PB0–PB7 und RESTORE von 330 Ω auf **100 Ω** geändert. Mit 330 Ω lag der Low-Pegel am C64 bei 0,69 V (CIA-Grenze 0,8 V) – kurze Tastendrücke gingen manchmal verloren. Mit 100 Ω ca. 0,3 V.
+- Firmware unverändert.
+
+### English
+
+- Hardware: resistors in PB0–PB7 and RESTORE changed from 330 Ω to **100 Ω**. With 330 Ω the low level at the C64 was 0.69 V (CIA limit 0.8 V) – short key presses were sometimes missed. With 100 Ω about 0.3 V.
+- Firmware unchanged.
+
 ## v0.9.0 – 2026-09-30
 
 ### Deutsch

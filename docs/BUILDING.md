@@ -4,7 +4,9 @@ You only need this if you want to change the firmware – a ready-to-flash `.uf2
 every [release](https://github.com/do2mad/pico64-keyboard/releases).
 
 Requirements: CMake, Ninja (or Make), the Arm GNU toolchain (`arm-none-eabi-gcc`) and the
-**Raspberry Pi Pico SDK 2.2.0** with the `cyw43-driver` and `btstack` submodules.
+**Raspberry Pi Pico SDK 2.2.0** with the `cyw43-driver` and `btstack` submodules, and git.
+[Bluepad32](https://github.com/ricardoquesada/bluepad32) is downloaded automatically by CMake
+(fixed revision `e9b755f`); to use a local copy add `-DBLUEPAD32_ROOT=/path/to/bluepad32`.
 
 ```sh
 git clone --depth 1 --branch 2.2.0 https://github.com/raspberrypi/pico-sdk.git
@@ -24,10 +26,15 @@ Alternatively use the "Raspberry Pi Pico" extension for VS Code, which installs 
 
 | File | Content |
 |---|---|
-| `matrix.c/.h` | pin assignment, core 1 loop (runs from RAM), lookup tables, open-drain outputs |
-| `ble_service.c/.h` | BLE service, key state queue and hold times, LED, key log |
+| `matrix.c/.h` | pin assignment, core 1 loop (runs from RAM), lookup tables, open-drain outputs, joystick lines |
+| `keys.c/.h` | key scheduler: merges app, keyboards and gamepad buttons, hold times, key log |
+| `ble_service.c/.h` | BLE service for the app (GATT, advertising), LED |
+| `input_bt.c/.h` | Bluepad32 platform: Bluetooth keyboards and gamepads, port assignment |
+| `keymap.c/.h` | HID keyboard → C64 keys (symbolic German / positional) |
+| `joystick.c/.h` | joystick ports 1 and 2, minimum hold time |
 | `textfeed.c/.h` | types text in BT-64 macro syntax (`~ret~`, `~clr~`, `~f1~` …) |
 | `main.c` | start-up, USB console |
 | `pico64.gatt` | GATT database (compiled into `pico64.h` by the build) |
-| `btstack_config.h` | BTstack configuration, BLE peripheral only |
-| `CMakeLists.txt` | build for `PICO_BOARD=pico2_w` |
+| `btstack_config.h` | BTstack configuration (Classic + LE, from the Bluepad32 example) |
+| `sdkconfig.h` | Bluepad32 configuration |
+| `CMakeLists.txt` | build for `PICO_BOARD=pico2_w`, fetches Bluepad32 |
