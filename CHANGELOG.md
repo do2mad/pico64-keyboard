@@ -2,6 +2,18 @@
 
 Pico64 Keyboard. Neueste Version zuerst.
 
+## v0.11.0 – 2026-10-08
+
+### Deutsch
+
+- **Zwei App-Geräte gleichzeitig:** z. B. iPhone und iPad (oder zwei Spieler) sind zugleich verbunden. Die Tasten beider Geräte werden zusammengelegt, wie bei zwei Tastaturen. Trennt sich ein Gerät, werden nur dessen Tasten losgelassen. Text sendet immer nur ein Gerät, das andere wartet kurz.
+- Zusammen höchstens 4 Bluetooth-Verbindungen (Apps, Tastaturen, Gamepads).
+
+### English
+
+- **Two app devices at the same time:** e.g. iPhone and iPad (or two players) can be connected together. Their keys are combined, like two keyboards. When one disconnects, only its keys are released. Only one device sends text at a time, the other one waits briefly.
+- Up to 4 Bluetooth connections in total (apps, keyboards, gamepads).
+
 ## v0.10.0 – 2026-10-01
 
 ### Deutsch

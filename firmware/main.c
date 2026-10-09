@@ -29,7 +29,7 @@
 #include "input_bt.h"
 #include "textfeed.h"
 
-#define PICO64_VERSION  "0.10.0"
+#define PICO64_VERSION  "0.11.0"
 #define CONSOLE_POLL_MS 20
 
 static btstack_timer_source_t console_timer;

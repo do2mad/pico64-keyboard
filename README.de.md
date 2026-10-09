@@ -28,13 +28,13 @@ Originaltastatur und Joysticks funktionieren weiter.
   aufgedruckt ist, oder positionsgleich für Spiele (F10 schaltet um)
 - **Bluetooth-Gamepads** (8BitDo, Xbox, PlayStation, Switch und viele mehr, über
   [Bluepad32](https://github.com/ricardoquesada/bluepad32)) als **Joystick in Port 1 oder 2**
-- App, Tastatur und Gamepads gleichzeitig nutzbar
+- App, Tastatur und Gamepads gleichzeitig nutzbar; **zwei App-Geräte** (z. B. iPhone und iPad) zugleich
 - USB-Konsole: jede im Terminal eingegebene Zeile wird auf dem C64 getippt, dazu ein Tasten-Protokoll zur Fehlersuche
 - Stromversorgung aus dem C64
 
 ## Stand
 
-**v0.10.0 – funktionierender Prototyp.** Auf Lochraster aufgebaut und an einem Brotkasten-C64 mit
+**v0.11.0 – funktionierender Prototyp.** Auf Lochraster aufgebaut und an einem Brotkasten-C64 mit
 iPhone und Android-Handy getestet. Bluetooth-Tastatur und -Gamepad sind neu in v0.10.0 und müssen
 noch mit mehr Geräten getestet werden. Eine KiCad-Platine ist in Arbeit (siehe [hardware/](hardware/)).
 
@@ -60,7 +60,8 @@ Firmware selbst bauen: [docs/BUILDING.md](docs/BUILDING.md). Bluetooth-Protokoll
 
 Der Pico sucht ständig nach Tastaturen und Gamepads. Zum Koppeln das Gerät in den Pairing-Modus
 bringen – es verbindet sich nach ein paar Sekunden von selbst (keine PIN, keine App nötig).
-Gekoppelte Geräte verbinden sich beim Einschalten automatisch wieder. Bis zu 4 Geräte gleichzeitig.
+Gekoppelte Geräte verbinden sich beim Einschalten automatisch wieder. Bis zu 4 Bluetooth-Verbindungen
+gleichzeitig (Apps, Tastaturen und Gamepads zusammen).
 
 - **Tastatur:** meist die Bluetooth-/Pairing-Taste (oder Fn + Kanaltaste) 3 s halten, siehe
   Anleitung der Tastatur. Fragt die Tastatur nach einem Code: `0000` und Enter tippen.

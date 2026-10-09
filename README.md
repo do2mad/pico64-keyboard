@@ -28,13 +28,13 @@ The original keyboard and both joysticks keep working.
   positional mapping for games (F10 switches)
 - **Bluetooth gamepads** (8BitDo, Xbox, PlayStation, Switch and many more, via
   [Bluepad32](https://github.com/ricardoquesada/bluepad32)) as **joystick in port 1 or 2**
-- App, keyboard and gamepads can be used at the same time
+- App, keyboard and gamepads can be used at the same time; **two app devices** (e.g. iPhone and iPad) at once
 - USB console: every line you type in a terminal is typed on the C64, plus a key log for debugging
 - Powered by the C64, no extra power supply
 
 ## Status
 
-**v0.10.0 – working prototype.** Built on perfboard and tested on a breadbin C64 with an
+**v0.11.0 – working prototype.** Built on perfboard and tested on a breadbin C64 with an
 iPhone and an Android phone. Bluetooth keyboard and gamepad support is new in v0.10.0 and still
 needs testing with more devices. A KiCad PCB is in progress (see [hardware/](hardware/)).
 
@@ -61,7 +61,8 @@ Bluetooth protocol: [docs/PROTOCOL.md](docs/PROTOCOL.md).
 
 The Pico looks for keyboards and gamepads all the time. To pair a new one, put it into pairing
 mode – it connects by itself within a few seconds (no PIN, no app needed). Paired devices
-reconnect automatically when switched on. Up to 4 devices at the same time.
+reconnect automatically when switched on. Up to 4 Bluetooth connections at the same time
+(apps, keyboards and gamepads together).
 
 - **Keyboard:** usually hold the Bluetooth / pairing key (or Fn + a channel key) for 3 s, see
   the keyboard's manual. If the keyboard asks for a code, type `0000` and Enter.

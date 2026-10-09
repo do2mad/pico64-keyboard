@@ -8,8 +8,11 @@
 // Bluepad32 (Bluetooth keyboards and gamepads) shares the same BTstack: it
 // initialises L2CAP and the Security Manager, this file only adds the GATT
 // server and the advertising. Bluepad32 also uses LE connections (BLE
-// keyboards, gamepads) - those are central connections, the app is the only
-// peripheral connection (we advertise, the phone connects).
+// keyboards, gamepads) - those are central connections, the apps are the
+// peripheral connections (we advertise, the phone connects).
+//
+// Up to MAX_APPS apps can be connected at the same time (e.g. iPhone and iPad);
+// their keys are combined like several keyboards on one C64.
 
 #include <stdio.h>
 #include <string.h>
@@ -64,13 +67,28 @@ _Static_assert(sizeof(adv_data) <= 31, "adv_data too big");
 // ---------------------------------------------------------------------------
 // State
 
-static hci_con_handle_t client = HCI_CON_HANDLE_INVALID;
+#define MAX_APPS 2
+
+static hci_con_handle_t apps[MAX_APPS] = { HCI_CON_HANDLE_INVALID, HCI_CON_HANDLE_INVALID };
+static const keysrc_t app_src[MAX_APPS] = { KEYSRC_APP, KEYSRC_APP2 };
 static btstack_packet_callback_registration_t hci_cb;
 static btstack_timer_source_t led_timer;
 
 static char     text_buf[TEXTFEED_MAX];
 static uint16_t text_len;
-static bool     text_collecting;
+static int      text_from = -1;                     // app collecting a text, -1 = none
+static int      text_owner = -1;                    // app whose text is being typed
+
+static int app_slot(hci_con_handle_t h) {
+    for (int i = 0; i < MAX_APPS; i++) if (apps[i] == h) return i;
+    return -1;
+}
+
+static int app_count(void) {
+    int n = 0;
+    for (int i = 0; i < MAX_APPS; i++) if (apps[i] != HCI_CON_HANDLE_INVALID) n++;
+    return n;
+}
 
 static void add_flags(kb_state_t *s, uint8_t flags) {
     if (flags & FLAG_SHIFT) kb_press(s, KB_LSHIFT_COL, KB_LSHIFT_ROW);
@@ -79,29 +97,34 @@ static void add_flags(kb_state_t *s, uint8_t flags) {
     if (flags & FLAG_RESTORE) s->restore = true;
 }
 
-static void app_gone(void) {
-    text_collecting = false;
-    if (keys_text_busy()) keys_release_all();   // a text from the app is aborted
-    keys_release_source(KEYSRC_APP);
+static void app_gone(int slot) {
+    if (text_from == slot) text_from = -1;
+    if (text_owner == slot && keys_text_busy()) keys_release_all();   // its text is aborted
+    if (text_owner == slot) text_owner = -1;
+    keys_release_source(app_src[slot]);
 }
 
 // ---------------------------------------------------------------------------
 // ATT
 
-static int handle_text(const uint8_t *buffer, uint16_t size) {
+static int handle_text(int slot, const uint8_t *buffer, uint16_t size) {
     if (size < 1) return ATT_ERROR_INVALID_ATTRIBUTE_VALUE_LENGTH;
     uint8_t flags = buffer[0];
-    if (flags & TEXT_FIRST) { text_len = 0; text_collecting = true; }
-    if (!text_collecting) return ATT_ERROR_REQUEST_NOT_SUPPORTED;
-    if (text_len + (size - 1) > TEXTFEED_MAX) { text_collecting = false; return ATT_APP_ERROR_OVERFLOW; }
+    if (flags & TEXT_FIRST) {
+        if (text_from >= 0 && text_from != slot) return ATT_APP_ERROR_BUSY;   // other app sends
+        text_len = 0; text_from = slot;
+    }
+    if (text_from != slot) return ATT_ERROR_REQUEST_NOT_SUPPORTED;
+    if (text_len + (size - 1) > TEXTFEED_MAX) { text_from = -1; return ATT_APP_ERROR_OVERFLOW; }
     if ((flags & TEXT_LAST) && keys_text_busy()) return ATT_APP_ERROR_BUSY;   // client retries
 
     memcpy(&text_buf[text_len], &buffer[1], size - 1);
     text_len = (uint16_t)(text_len + size - 1);
 
     if (flags & TEXT_LAST) {
-        text_collecting = false;
+        text_from = -1;
         if (!keys_type_text(text_buf, text_len)) return ATT_APP_ERROR_BUSY;
+        text_owner = slot;
         printf("text feed: %u chars\n", text_len);
     }
     return 0;
@@ -109,7 +132,8 @@ static int handle_text(const uint8_t *buffer, uint16_t size) {
 
 static int att_write_cb(hci_con_handle_t con, uint16_t handle, uint16_t mode,
                         uint16_t offset, uint8_t *buffer, uint16_t size) {
-    if (con != client) return 0;                // only the app writes here
+    int slot = app_slot(con);
+    if (slot < 0) return 0;                     // only the apps write here
     if (mode != ATT_TRANSACTION_MODE_NONE || offset != 0)
         return ATT_ERROR_REQUEST_NOT_SUPPORTED;
 
@@ -122,16 +146,16 @@ static int att_write_cb(hci_con_handle_t con, uint16_t handle, uint16_t mode,
                    (unsigned long)to_ms_since_boot(get_absolute_time()), buffer[0], buffer[1]);
         add_flags(&s, buffer[0]);
         if (buffer[1] != KEY_NONE) kb_press(&s, (buffer[1] >> 3) & 7, buffer[1] & 7);
-        keys_post(KEYSRC_APP, &s);
+        keys_post(app_src[slot], &s);
         return 0;
     case H_MATRIX:
         if (size != 9) return ATT_ERROR_INVALID_ATTRIBUTE_VALUE_LENGTH;
         add_flags(&s, buffer[0]);
         for (int i = 0; i < 8; i++) s.cols[i] |= buffer[1 + i];
-        keys_post(KEYSRC_APP, &s);
+        keys_post(app_src[slot], &s);
         return 0;
     case H_TEXT:
-        return handle_text(buffer, size);
+        return handle_text(slot, buffer, size);
     default:
         return 0;
     }
@@ -173,21 +197,25 @@ static void packet_handler(uint8_t type, uint16_t channel, uint8_t *packet, uint
     switch (hci_event_packet_get_type(packet)) {
     case ATT_EVENT_CONNECTED: {
         hci_con_handle_t h = att_event_connected_get_handle(packet);
-        if (!is_app_connection(h)) break;        // a BLE keyboard / gamepad (Bluepad32)
-        client = h;
-        printf("app connected\n");
+        if (!is_app_connection(h) || app_slot(h) >= 0) break;   // BLE keyboard / gamepad (Bluepad32)
+        int slot = app_slot(HCI_CON_HANDLE_INVALID);
+        if (slot < 0) { gap_disconnect(h); break; }            // all places taken
+        apps[slot] = h;
+        printf("app %d connected (%d of %d)\n", slot + 1, app_count(), MAX_APPS);
         // Ask for a short connection interval: 15-30 ms (units of 1.25 ms), no latency,
         // 4 s timeout - within Apple's accessory guidelines. iOS otherwise often uses
         // 30 ms or more, which makes key presses feel late.
-        gap_request_connection_parameter_update(client, 12, 24, 0, 400);
+        gap_request_connection_parameter_update(h, 12, 24, 0, 400);
         break;
     }
-    case ATT_EVENT_DISCONNECTED:
-        if (att_event_disconnected_get_handle(packet) != client) break;
-        client = HCI_CON_HANDLE_INVALID;
-        printf("app disconnected - releasing its keys\n");
-        app_gone();
+    case ATT_EVENT_DISCONNECTED: {
+        int slot = app_slot(att_event_disconnected_get_handle(packet));
+        if (slot < 0) break;
+        apps[slot] = HCI_CON_HANDLE_INVALID;
+        printf("app %d disconnected - releasing its keys\n", slot + 1);
+        app_gone(slot);
         break;
+    }
     case HCI_EVENT_LE_META:
         switch (hci_event_le_meta_get_subevent_code(packet)) {
         case HCI_SUBEVENT_LE_CONNECTION_COMPLETE:
@@ -199,21 +227,23 @@ static void packet_handler(uint8_t type, uint16_t channel, uint8_t *packet, uint
                 print_interval("app connected, interval", hci_subevent_le_enhanced_connection_complete_v1_get_conn_interval(packet));
             break;
         case HCI_SUBEVENT_LE_CONNECTION_UPDATE_COMPLETE:
-            if (hci_subevent_le_connection_update_complete_get_connection_handle(packet) == client)
+            if (app_slot(hci_subevent_le_connection_update_complete_get_connection_handle(packet)) >= 0)
                 print_interval("app connection interval now", hci_subevent_le_connection_update_complete_get_conn_interval(packet));
             break;
         default:
             break;
         }
         break;
-    case HCI_EVENT_DISCONNECTION_COMPLETE:
-        if (hci_event_disconnection_complete_get_connection_handle(packet) == client) {
-            client = HCI_CON_HANDLE_INVALID;
-            app_gone();
+    case HCI_EVENT_DISCONNECTION_COMPLETE: {
+        int slot = app_slot(hci_event_disconnection_complete_get_connection_handle(packet));
+        if (slot >= 0) {
+            apps[slot] = HCI_CON_HANDLE_INVALID;
+            app_gone(slot);
         }
-        // advertising stops while the app is connected - switch it on again
-        if (client == HCI_CON_HANDLE_INVALID) gap_advertisements_enable(1);
+        // BTstack advertises by itself while a place is free; make sure it is on
+        if (app_count() < MAX_APPS) gap_advertisements_enable(1);
         break;
+    }
     default:
         break;
     }
@@ -222,7 +252,7 @@ static void packet_handler(uint8_t type, uint16_t channel, uint8_t *packet, uint
 // LED: blinking while nothing is connected, on while the app or a Bluetooth device is connected
 static void led_tick(btstack_timer_source_t *ts) {
     static bool on;
-    on = (client != HCI_CON_HANDLE_INVALID || input_bt_device_count() > 0) ? true : !on;
+    on = (app_count() > 0 || input_bt_device_count() > 0) ? true : !on;
     cyw43_arch_gpio_put(CYW43_WL_GPIO_LED_PIN, on);
     btstack_run_loop_set_timer(ts, 500);
     btstack_run_loop_add_timer(ts);
@@ -234,6 +264,7 @@ void ble_service_start(void) {
     // L2CAP and the Security Manager are already set up by Bluepad32
     att_server_init(pico64_profile_data, att_read_cb, att_write_cb);
     att_server_register_packet_handler(packet_handler);
+    gap_set_max_number_peripheral_connections(MAX_APPS);   // keep advertising for a 2nd app
 
     hci_cb.callback = &packet_handler;
     hci_add_event_handler(&hci_cb);
@@ -249,5 +280,5 @@ void ble_service_start(void) {
 }
 
 bool ble_service_connected(void) {
-    return client != HCI_CON_HANDLE_INVALID;
+    return app_count() > 0;
 }
