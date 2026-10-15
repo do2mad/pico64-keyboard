@@ -168,6 +168,12 @@ Terminal mit 115200 Baud öffnen, z. B. auf dem Mac `screen /dev/tty.usbmodem* 1
 - [BT-64 mit BLE-Tastaturdienst](https://github.com/do2mad/BT-64/tree/ble-keyboard) – die
   Firmware-Erweiterung für den BT-64 / Blue-64
 
+## Forum
+
+Fragen, Fotos, Erfahrungen: der Thread im Retro-Forum
+[1mhz.de – Pico64-Keyboard, SPL BT-64 oder Blue-64 Tastaturadapter](https://1mhz.de/forum/thread/8761-pico64-keyboard-spl-bt-64-oder-blue-64-tastaturadapter/).
+Fehlerberichte und Wünsche gern auch als GitHub-Issue.
+
 ## Dank und Lizenz
 
 - Firmware © 2026 Martin Oswald (do2mad) – [1mhz.de](https://1mhz.de), [MIT-Lizenz](LICENSE)

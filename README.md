@@ -168,6 +168,12 @@ terminal with 115200 baud, e.g. `screen /dev/tty.usbmodem* 115200` on a Mac.
 - [BT-64 with BLE keyboard service](https://github.com/do2mad/BT-64/tree/ble-keyboard) – the
   firmware extension for the BT-64 / Blue-64 adapter
 
+## Discussion
+
+Questions, photos, experiences: the thread in the (German) retro forum
+[1mhz.de – Pico64-Keyboard, SPL BT-64 oder Blue-64 Tastaturadapter](https://1mhz.de/forum/thread/8761-pico64-keyboard-spl-bt-64-oder-blue-64-tastaturadapter/).
+Bug reports and feature requests are also welcome as a GitHub issue.
+
 ## Credits & license
 
 - Firmware © 2026 Martin Oswald (do2mad) – [1mhz.de](https://1mhz.de), [MIT License](LICENSE)
