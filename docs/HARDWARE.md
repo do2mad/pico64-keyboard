@@ -114,8 +114,8 @@ header above it takes the keyboard cable plug, all 20 lines are connected 1:1. T
 lines through the resistors. Mind the key pin (pin 2) so the keyboard cable cannot be plugged in
 the wrong way round.
 
-A PCB in KiCad, with the Pico lying flat, is in progress so the adapter fits under the case top –
-see [../hardware/](../hardware/).
+There is a **PCB** with the Pico soldered flat into a cut-out, so the adapter fits under the case
+top – Gerber files, parts list and photos in [../hardware/](../hardware/).
 
 ## Test plan
 

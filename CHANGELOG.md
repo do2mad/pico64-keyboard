@@ -2,6 +2,16 @@
 
 Pico64 Keyboard. Neueste Version zuerst.
 
+## Neu (noch ohne Release) / Unreleased
+
+### Deutsch
+
+- **Platine** im Ordner `hardware/`: Gerber-Dateien v1.1 (ohne Bohrungen an der Steckerkodierung Pin 2, mit Pin-Nummern), Stückliste, Fotos.
+
+### English
+
+- **PCB** in the folder `hardware/`: Gerber files v1.1 (no holes at the connector key pin 2, pin numbers added), parts list, photos.
+
 ## v0.12.0 – 2026-10-15
 
 ### Deutsch

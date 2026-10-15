@@ -34,16 +34,17 @@ The original keyboard and both joysticks keep working.
 
 ## Status
 
-**v0.12.0 – working prototype.** Built on perfboard and tested on a breadbin C64 with an
-iPhone and an Android phone. Bluetooth keyboard and gamepad support is new in v0.10.0 and still
-needs testing with more devices. A KiCad PCB is in progress (see [hardware/](hardware/)).
+**v0.12.0 – working.** Tested on a breadbin C64 with an iPhone and an Android phone,
+first on perfboard, now on its own **PCB** (Gerber files, parts list and photos in
+[hardware/](hardware/)). Bluetooth keyboard and gamepad support still needs testing with more devices.
 
 > **Hardware change in v0.10:** all 17 resistors are now 100 Ω (PA0–PA7 were 1 kΩ). Joystick
 > port 2 needs this – everything else also works with the old values. See [docs/HARDWARE.md](docs/HARDWARE.md).
 
 ## Getting started
 
-1. **Build the adapter** – wiring, parts list and safety notes: [docs/HARDWARE.md](docs/HARDWARE.md).
+1. **Build the adapter** – PCB (Gerber files, parts list): [hardware/](hardware/); wiring and safety
+   notes, also for perfboard: [docs/HARDWARE.md](docs/HARDWARE.md).
    Check the CN1 pinout of your C64 with a multimeter before soldering.
 2. **Flash the firmware** – hold BOOTSEL, plug the Pico into your computer, drag
    `pico64-keyboard-vX.Y.Z.uf2` from the [latest release](https://github.com/do2mad/pico64-keyboard/releases/latest)

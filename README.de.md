@@ -34,16 +34,17 @@ Originaltastatur und Joysticks funktionieren weiter.
 
 ## Stand
 
-**v0.12.0 – funktionierender Prototyp.** Auf Lochraster aufgebaut und an einem Brotkasten-C64 mit
-iPhone und Android-Handy getestet. Bluetooth-Tastatur und -Gamepad sind neu in v0.10.0 und müssen
-noch mit mehr Geräten getestet werden. Eine KiCad-Platine ist in Arbeit (siehe [hardware/](hardware/)).
+**v0.12.0 – funktioniert.** An einem Brotkasten-C64 mit iPhone und Android-Handy getestet,
+zuerst auf Lochraster, jetzt auf einer eigenen **Platine** (Gerber-Dateien, Stückliste und Fotos in
+[hardware/](hardware/)). Bluetooth-Tastatur und -Gamepad müssen noch mit mehr Geräten getestet werden.
 
 > **Hardware-Änderung in v0.10:** alle 17 Widerstände sind jetzt 100 Ω (PA0–PA7 waren 1 kΩ).
 > Joystick-Port 2 braucht das – alles andere geht auch mit den alten Werten. Siehe [docs/HARDWARE.md](docs/HARDWARE.md).
 
 ## Loslegen
 
-1. **Adapter bauen** – Verdrahtung, Stückliste, Sicherheitshinweise: [docs/HARDWARE.md](docs/HARDWARE.md) (englisch).
+1. **Adapter bauen** – Platine (Gerber-Dateien, Stückliste): [hardware/](hardware/); Verdrahtung und
+   Sicherheitshinweise, auch für Lochraster: [docs/HARDWARE.md](docs/HARDWARE.md) (englisch).
    Die Belegung von CN1 am eigenen C64 vor dem Löten mit dem Multimeter prüfen.
 2. **Firmware aufspielen** – BOOTSEL gedrückt halten, Pico per USB an den Rechner, die Datei
    `pico64-keyboard-vX.Y.Z.uf2` aus dem [neuesten Release](https://github.com/do2mad/pico64-keyboard/releases/latest)
