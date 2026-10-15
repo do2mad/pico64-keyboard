@@ -34,7 +34,7 @@ The original keyboard and both joysticks keep working.
 
 ## Status
 
-**v0.11.0 – working prototype.** Built on perfboard and tested on a breadbin C64 with an
+**v0.12.0 – working prototype.** Built on perfboard and tested on a breadbin C64 with an
 iPhone and an Android phone. Bluetooth keyboard and gamepad support is new in v0.10.0 and still
 needs testing with more devices. A KiCad PCB is in progress (see [hardware/](hardware/)).
 
@@ -108,6 +108,35 @@ Two modes, **F10** switches (the USB console shows the current mode):
 
 The first gamepad plays on **port 2** (most games), a second one on port 1.
 
+## USB keyboard (without a C64)
+
+Take the board out of the C64, plug the C64 keyboard cable into it and connect the Pico via USB
+to a Mac, PC, Raspberry Pi or MiSTer: the **real C64 keyboard becomes a USB keyboard**. The app
+and Bluetooth keyboards work at the same time and are sent via USB too.
+
+The Pico decides when it starts: without USB power it can only be powered by the C64 → C64
+mode. With USB power it listens for 0.6 s whether a C64 scans the keyboard → C64 mode,
+otherwise USB keyboard. If a C64 starts scanning later, the Pico restarts in C64 mode by itself.
+A C64 that is switched off but still connected pulls the lines low – the Pico then stays in C64
+mode (the USB keyboard only works with the board outside the C64).
+
+Choose the output with **RESTORE + F key** (stored):
+
+| Keys | Output |
+|---|---|
+| RESTORE + F1 | MiSTer, C64 core (keys as the core expects them; RESTORE alone = F11) |
+| RESTORE + F3 | PC, German layout |
+| RESTORE + F5 | PC, US layout |
+| RESTORE + F7 | Mac, German layout |
+| RESTORE + F8 (SHIFT + F7) | Mac, US layout |
+
+PC / Mac: types what is printed on the key (SHIFT + 2 = `"`, SHIFT + `:` = `[`). DEL = Backspace,
+INST = Insert, CRSR = cursor keys, F1–F8, HOME / CLR = Home / End, RUN/STOP = Esc, ← = Tab,
+CTRL = Ctrl, C= = Win / Cmd, £ = `\`. Like the original, the keyboard has no diodes, so some
+three-key combinations show a phantom key.
+
+In the USB console `!u` shows the mode, `!u0` … `!u4` choose the output.
+
 ## USB console
 
 Connect the Pico via USB while it sits in the C64 (the diode protects both sides) and open a
@@ -118,7 +147,8 @@ terminal with 115200 baud, e.g. `screen /dev/tty.usbmodem* 115200` on a Mac.
 - A line with just `d` switches the key log on or off: every key state received via Bluetooth
   and every state applied to the matrix, with timestamps, plus the connection interval.
 - `!s` status (app, keyboards, gamepads, joystick ports), `!p` switch keyboard mapping,
-  `!b` search for new Bluetooth devices on/off, `!x` forget all paired keyboards / gamepads.
+  `!b` search for new Bluetooth devices on/off, `!x` forget all paired keyboards / gamepads,
+  `!u` USB keyboard mode (see above).
 
 ## Safety
 

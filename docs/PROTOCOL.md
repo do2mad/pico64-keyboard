@@ -24,6 +24,7 @@ Two bytes: `[flags, key]`
 | 1 | C= (Commodore key) |
 | 2 | CTRL |
 | 3 | RESTORE |
+| 4 | right SHIFT – only together with bit 0. Pico64 (≥ 0.11.1) and Pico USB Keyboard (≥ 0.4.1) then press the right SHIFT key instead of the left one; the Blue-64 (from v1.12-ble2) presses the right SHIFT only when no other key is held, otherwise the left one (it can address only one matrix position) |
 
 `key` is the C64 keyboard matrix position `PA * 8 + PB` (0–63), where PA is the column line
 (CIA1 port A) and PB the row line (CIA1 port B). `0xFF` = no key.

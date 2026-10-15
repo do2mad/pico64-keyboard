@@ -36,7 +36,16 @@ typedef struct {
 #define JOY_RIGHT 0x08
 #define JOY_FIRE  0x10
 
-void matrix_init(void);                     // set up pins, start core 1
+void matrix_init(void);                     // set up pins (all released)
+void matrix_start_c64(void);                // C64 mode: start core 1 (matrix emulation)
+
+// USB keyboard mode (Pico not in a running C64, powered by USB)
+bool matrix_detect_c64(uint32_t ms, void (*idle)(void));   // true = a C64 scans the keyboard
+void matrix_start_usb(void);                // core 1 scans the real C64 keyboard
+bool matrix_usb_mode(void);
+bool matrix_c64_seen(void);                 // USB mode: a C64 started scanning
+void matrix_scan_get(kb_state_t *out);      // USB mode: debounced real keyboard
+const kb_state_t *matrix_virtual(void);     // USB mode: keys from app / Bluetooth
 void matrix_apply(const kb_state_t *s);     // publish a new keyboard state
 void matrix_release_all(void);
 void matrix_set_joystick(uint8_t port1, uint8_t port2);   // JOY_* bits, 0 = released

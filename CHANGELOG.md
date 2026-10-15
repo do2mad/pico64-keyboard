@@ -2,6 +2,30 @@
 
 Pico64 Keyboard. Neueste Version zuerst.
 
+## v0.12.0 – 2026-10-15
+
+### Deutsch
+
+- **USB-Tastatur ohne C64:** Platine außerhalb des C64, Tastaturkabel dran, USB an Mac/PC/MiSTer – die echte C64-Tastatur wird zur USB-Tastatur. Ausgabe mit RESTORE + F1 (MiSTer C64-Core), F3 (PC deutsch), F5 (PC US), F7 (Mac deutsch), F8 (Mac US). App und Bluetooth-Tastaturen gehen dann auch per USB raus.
+- Automatische Erkennung beim Start (USB-Spannung, fragt ein C64 die Tastatur ab?); startet ein C64 später, wechselt der Pico von selbst in den C64-Modus. Hardware unverändert.
+- Konsole: `!u` Modus anzeigen, `!u0`–`!u4` Ausgabe wählen.
+
+### English
+
+- **USB keyboard without a C64:** board outside the C64, keyboard cable connected, USB to a Mac/PC/MiSTer – the real C64 keyboard becomes a USB keyboard. Output with RESTORE + F1 (MiSTer C64 core), F3 (PC German), F5 (PC US), F7 (Mac German), F8 (Mac US). The app and Bluetooth keyboards are sent via USB too.
+- Automatic detection at start (USB power, does a C64 scan the keyboard?); if a C64 starts later, the Pico switches to C64 mode by itself. No hardware change.
+- Console: `!u` shows the mode, `!u0`–`!u4` choose the output.
+
+## v0.11.1 – 2026-10-15
+
+### Deutsch
+
+- Die **rechte SHIFT-Taste** der App wird jetzt als rechte SHIFT-Taste des C64 gedrückt (vorher immer die linke). Braucht die App ab 1.1.0 (7); mit älteren Apps bleibt es bei der linken.
+
+### English
+
+- The app's **right SHIFT key** now presses the C64's right SHIFT key (was always the left one). Needs the app 1.1.0 (7) or newer; older apps keep using the left one.
+
 ## v0.11.0 – 2026-10-08
 
 ### Deutsch

@@ -38,6 +38,7 @@
 #define FLAG_CMDR    0x02
 #define FLAG_CTRL    0x04
 #define FLAG_RESTORE 0x08
+#define FLAG_RSHIFT  0x10   // with FLAG_SHIFT: the right SHIFT key (app 1.1.0 build 7 and newer)
 #define KEY_NONE     0xFF
 
 #define TEXT_FIRST 0x01
@@ -91,7 +92,10 @@ static int app_count(void) {
 }
 
 static void add_flags(kb_state_t *s, uint8_t flags) {
-    if (flags & FLAG_SHIFT) kb_press(s, KB_LSHIFT_COL, KB_LSHIFT_ROW);
+    if ((flags & (FLAG_SHIFT | FLAG_RSHIFT)) == (FLAG_SHIFT | FLAG_RSHIFT))
+        kb_press(s, KB_RSHIFT_COL, KB_RSHIFT_ROW);
+    else if (flags & FLAG_SHIFT)
+        kb_press(s, KB_LSHIFT_COL, KB_LSHIFT_ROW);
     if (flags & FLAG_CMDR)  kb_press(s, KB_CMDR_COL,   KB_CMDR_ROW);
     if (flags & FLAG_CTRL)  kb_press(s, KB_CTRL_COL,   KB_CTRL_ROW);
     if (flags & FLAG_RESTORE) s->restore = true;

@@ -13,6 +13,11 @@
 //   !p   keyboard mapping (symbolic DE / positional, same as F10)
 //   !b   scanning for new Bluetooth devices on/off
 //   !x   forget all paired Bluetooth keyboards / gamepads
+//   !u   USB keyboard mode status, !u0..!u4 choose its output (see usb_mode.c)
+//
+// USB keyboard mode: powered by USB and no C64 scanning the keyboard -> the
+// real C64 keyboard on the board becomes a USB keyboard (PC, Mac, MiSTer).
+// Without USB power the Pico can only be powered by the C64 -> C64 mode.
 
 #include <stdio.h>
 #include <ctype.h>
@@ -28,8 +33,10 @@
 #include "joystick.h"
 #include "input_bt.h"
 #include "textfeed.h"
+#include "usb_kbd.h"
+#include "usb_mode.h"
 
-#define PICO64_VERSION  "0.11.0"
+#define PICO64_VERSION  "0.12.0"
 #define CONSOLE_POLL_MS 20
 
 static btstack_timer_source_t console_timer;
@@ -50,6 +57,7 @@ static bool handle_command(void) {
     if (is_cmd("!s")) { input_bt_status();          return true; }
     if (is_cmd("!b")) { input_bt_toggle_scan();     return true; }
     if (is_cmd("!x")) { input_bt_forget_all();      return true; }
+    if (usb_mode_command(line, line_len))           return true;
     return false;
 }
 
@@ -82,15 +90,26 @@ static void console_poll(btstack_timer_source_t *ts) {
 }
 
 int main(void) {
+    matrix_init();               // all C64 lines released first
+
+    if (cyw43_arch_init()) return -1;
+
+    // C64 or USB keyboard? No USB power -> only the C64 can power us. With USB
+    // power, a running C64 still shows itself by scanning the keyboard (a C64
+    // that is switched off but connected pulls the lines low - also C64 mode).
+    bool vbus = cyw43_arch_gpio_get(CYW43_WL_GPIO_VBUS_PIN);
+    bool usb_keyboard = vbus && !matrix_detect_c64(600, NULL);
+
+    // USB: serial console (+ keyboard in USB keyboard mode); TinyUSB is run by
+    // usb_mode.c every 1 ms
+    usb_kbd_init(usb_keyboard);
     stdio_init_all();
 
-    matrix_init();               // pins released first, then core 1 starts
-
-    if (cyw43_arch_init()) {
-        printf("cyw43 init failed\n");
-        return -1;
-    }
-    printf("Pico64 Keyboard v" PICO64_VERSION " starting\n");
+    if (usb_keyboard) matrix_start_usb();
+    else              matrix_start_c64();
+    printf("Pico64 Keyboard v" PICO64_VERSION " starting (%s)\n",
+           usb_keyboard ? "USB keyboard, no C64" : "C64");
+    usb_mode_start(usb_keyboard);
 
     keys_init();
     joystick_init();

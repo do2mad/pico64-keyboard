@@ -34,7 +34,7 @@ Originaltastatur und Joysticks funktionieren weiter.
 
 ## Stand
 
-**v0.11.0 – funktionierender Prototyp.** Auf Lochraster aufgebaut und an einem Brotkasten-C64 mit
+**v0.12.0 – funktionierender Prototyp.** Auf Lochraster aufgebaut und an einem Brotkasten-C64 mit
 iPhone und Android-Handy getestet. Bluetooth-Tastatur und -Gamepad sind neu in v0.10.0 und müssen
 noch mit mehr Geräten getestet werden. Eine KiCad-Platine ist in Arbeit (siehe [hardware/](hardware/)).
 
@@ -108,6 +108,35 @@ Zwei Modi, **F10** schaltet um (die USB-Konsole zeigt den aktuellen Modus):
 
 Das erste Gamepad spielt an **Port 2** (die meisten Spiele), ein zweites an Port 1.
 
+## USB-Tastatur (ohne C64)
+
+Platine aus dem C64 nehmen, das Tastaturkabel des C64 daran anschließen und den Pico per USB mit
+Mac, PC, Raspberry Pi oder MiSTer verbinden: Die **echte C64-Tastatur wird zur USB-Tastatur**.
+App und Bluetooth-Tastaturen funktionieren gleichzeitig und gehen ebenfalls per USB raus.
+
+Der Pico entscheidet beim Start: Ohne USB-Spannung kann ihn nur der C64 versorgen → C64-Modus.
+Mit USB-Spannung lauscht er 0,6 s, ob ein C64 die Tastatur abfragt → C64-Modus, sonst
+USB-Tastatur. Fängt ein C64 später an abzufragen, startet der Pico von selbst im C64-Modus neu.
+Ein ausgeschalteter, aber angeschlossener C64 zieht die Leitungen herunter – dann bleibt der
+Pico im C64-Modus (die USB-Tastatur geht nur mit der Platine außerhalb des C64).
+
+Die Ausgabe wählt man mit **RESTORE + F-Taste** (wird gespeichert):
+
+| Tasten | Ausgabe |
+|---|---|
+| RESTORE + F1 | MiSTer, C64-Core (Tasten so, wie der Core sie erwartet; RESTORE allein = F11) |
+| RESTORE + F3 | PC, deutsches Layout |
+| RESTORE + F5 | PC, US-Layout |
+| RESTORE + F7 | Mac, deutsches Layout |
+| RESTORE + F8 (SHIFT + F7) | Mac, US-Layout |
+
+PC / Mac: Es kommt an, was auf der Taste steht (SHIFT + 2 = `"`, SHIFT + `:` = `[`). DEL = Backspace,
+INST = Einfg, CRSR = Pfeiltasten, F1–F8, HOME / CLR = Pos1 / Ende, RUN/STOP = Esc, ← = Tab,
+CTRL = Strg, C= = Win / Cmd, £ = `\`. Wie beim Original hat die Tastatur keine Dioden, bei manchen
+Dreier-Kombinationen erscheint deshalb eine Phantomtaste.
+
+In der USB-Konsole zeigt `!u` den Modus, `!u0` … `!u4` wählen die Ausgabe.
+
 ## USB-Konsole
 
 Pico per USB anschließen, während er im C64 steckt (die Diode schützt beide Seiten), und ein
@@ -118,7 +147,8 @@ Terminal mit 115200 Baud öffnen, z. B. auf dem Mac `screen /dev/tty.usbmodem* 1
 - Eine Zeile nur mit `d` schaltet das Tasten-Protokoll an/aus: jeder per Bluetooth empfangene
   Tastenzustand und jeder an die Matrix angelegte Zustand mit Zeitstempel, dazu das Verbindungsintervall.
 - `!s` Status (App, Tastaturen, Gamepads, Joystick-Ports), `!p` Tastaturbelegung umschalten,
-  `!b` Suche nach neuen Bluetooth-Geräten an/aus, `!x` alle gekoppelten Tastaturen/Gamepads vergessen.
+  `!b` Suche nach neuen Bluetooth-Geräten an/aus, `!x` alle gekoppelten Tastaturen/Gamepads vergessen,
+  `!u` USB-Tastatur-Modus (siehe oben).
 
 ## Sicherheit
 

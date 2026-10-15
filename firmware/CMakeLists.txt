@@ -45,6 +45,8 @@ add_executable(pico64
     ble_service.c
     input_bt.c
     textfeed.c
+    usb_kbd.c
+    usb_mode.c
 )
 
 target_include_directories(pico64 PRIVATE ${CMAKE_CURRENT_LIST_DIR})
@@ -58,11 +60,14 @@ target_link_libraries(pico64
     pico_btstack_cyw43
     pico_cyw43_arch_none
     bluepad32
+    tinyusb_device       # USB console + USB keyboard mode (usb_kbd.c)
+    pico_unique_id
 )
 
 pico_btstack_make_gatt_header(pico64 PRIVATE "${CMAKE_CURRENT_LIST_DIR}/pico64.gatt")
 
-# USB serial console (115200): status output, commands and "type text"
+# USB serial console (115200): status output, commands and "type text".
+# The USB descriptors come from usb_kbd.c (console + keyboard), stdio uses its CDC port.
 pico_enable_stdio_usb(pico64 1)
 pico_enable_stdio_uart(pico64 0)
 
