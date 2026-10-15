@@ -1,6 +1,6 @@
 # Pico64 Keyboard
 
-*Deutsche Fassung: [README.de.md](README.de.md)*
+> 🇩🇪 **Deutsche Anleitung: [README.de.md](README.de.md)**
 
 A tiny adapter that turns a **Raspberry Pi Pico 2 W** into a wireless keyboard and joystick
 interface for the **Commodore 64** – use your phone with the
