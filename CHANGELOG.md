@@ -6,6 +6,7 @@ Pico64 Keyboard. Neueste Version zuerst.
 
 ### Deutsch
 
+- Nachtrag 07.11.2026: Gerber V2 aktualisiert – Ausschnitt unter der Pico-Antenne, überarbeiteter Bestückungsdruck (Kupfer unverändert).
 - **Platine V2** (`hardware/gerber/pico64-keyboard-gerber-v2.0.zip`): Pico 2 W oben aufgelötet oder mit Leisten gesteckt, 4-polige JST-XH-Buchse J3 für das Kabel zum CBM2 Keyboard, 47 × 68 mm. Stückliste und Fotos in `hardware/`.
 - Doku: Hardware, Protokoll (jetzt mit Kabelprotokoll) und Bauanleitung auch auf Deutsch; Firmware direkt aus dem Browser aufspielen: https://1mhz.de/Pico64/
 - **Platine** im Ordner `hardware/`: Gerber-Dateien v1.1 (ohne Bohrungen an der Steckerkodierung Pin 2, mit Pin-Nummern), Stückliste, Fotos.
@@ -13,6 +14,7 @@ Pico64 Keyboard. Neueste Version zuerst.
 
 ### English
 
+- Update 2026-11-07: Gerber V2 updated – cut-out under the Pico antenna, reworked silkscreen (copper unchanged).
 - **PCB V2** (`hardware/gerber/pico64-keyboard-gerber-v2.0.zip`): Pico 2 W on top, soldered or plugged in with headers, 4-pin JST-XH socket J3 for the cable to the CBM2 Keyboard, 47 × 68 mm. Parts list and photos in `hardware/`.
 - Docs: hardware, protocol (now with the cable protocol) and build guide also in German; flash the firmware straight from the browser: https://1mhz.de/Pico64/
 - **PCB** in the folder `hardware/`: Gerber files v1.1 (no holes at the connector key pin 2, pin numbers added), parts list, photos.

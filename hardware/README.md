@@ -16,6 +16,10 @@ towards the C64 is the same on both, and so is the firmware.
 
 Both: 2 layers, 1.6 mm, through-hole parts only. Tested in a breadbin C64.
 
+V2 has a cut-out in the PCB under the antenna of the Pico 2 W (better radio reception).
+Gerber state 2026-11-07: cut-out and reworked silkscreen – the copper layers are unchanged,
+earlier V2 boards work just the same.
+
 ## V2
 
 | | |

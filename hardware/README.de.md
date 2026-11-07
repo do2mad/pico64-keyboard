@@ -16,6 +16,10 @@ für den C64 ist bei beiden gleich, die Firmware auch.
 
 Beide: 2 Lagen, 1,6 mm, nur bedrahtete Bauteile. Im Brotkasten-C64 getestet.
 
+V2 hat unter der Antenne des Pico 2 W einen Ausschnitt in der Platine (besserer Funkempfang).
+Gerber-Stand 07.11.2026: Ausschnitt und überarbeiteter Bestückungsdruck – die Kupferlagen sind
+unverändert, frühere V2-Platinen funktionieren genauso.
+
 ## V2
 
 | | |
