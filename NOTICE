@@ -3,6 +3,10 @@ Copyright (c) 2026 Martin Oswald (https://1mhz.de)
 
 Firmware: MIT License (LICENSE). Hardware: CC BY-NC-SA 4.0 (LICENSE-HARDWARE.md).
 
+Scope: the MIT License applies to the firmware (folder firmware/) and the documentation
+text, unless stated otherwise. The hardware design (schematic, PCB, folder hardware/ and
+docs/wiring.png) is licensed separately under CC BY-NC-SA 4.0, see LICENSE-HARDWARE.md.
+
 Third-party components (not part of this repository, pulled in by the build):
 
 - Raspberry Pi Pico SDK - Copyright (c) Raspberry Pi (Trading) Ltd., BSD-3-Clause
