@@ -1,5 +1,5 @@
 // Pico64 Keyboard – USB keyboard mode: the real C64 keyboard as USB keyboard
-// Copyright (c) 2026 Martin Oswald (do2mad, 1mhz.de) - SPDX-License-Identifier: MIT
+// Copyright (c) 2026 Martin Oswald (1mhz.de) - SPDX-License-Identifier: MIT
 #ifndef PICO64_USB_MODE_H
 #define PICO64_USB_MODE_H
 

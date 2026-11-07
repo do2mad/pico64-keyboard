@@ -1,5 +1,5 @@
 // Pico64 Keyboard – BLE keyboard service for the app (compatible with the BT-64 BLE keyboard service v1)
-// Copyright (c) 2026 Martin Oswald (do2mad, 1mhz.de) - SPDX-License-Identifier: MIT
+// Copyright (c) 2026 Martin Oswald (1mhz.de) - SPDX-License-Identifier: MIT
 #ifndef PICO64_BLE_SERVICE_H
 #define PICO64_BLE_SERVICE_H
 

@@ -1,5 +1,5 @@
 // Pico64 Keyboard – key scheduler: merges all key sources and feeds the matrix
-// Copyright (c) 2026 Martin Oswald (do2mad, 1mhz.de) - SPDX-License-Identifier: MIT
+// Copyright (c) 2026 Martin Oswald (1mhz.de) - SPDX-License-Identifier: MIT
 //
 // Runs in the BTstack context (single threaded). Every source (app, Bluetooth
 // keyboard, gamepad buttons) posts complete states. The updates go through one
@@ -60,6 +60,11 @@ static void schedule(void);
 static void hold_done(btstack_timer_source_t *ts) {
     (void)ts;
     holding = false;
+    if (!textfeed_busy() && q_empty()) {      // cable keys may have changed meanwhile
+        kb_state_t s;
+        merged(&s);
+        matrix_apply(&s);
+    }
     schedule();
 }
 
@@ -110,6 +115,18 @@ void keys_init(void) {
 
 void keys_post(keysrc_t src, const kb_state_t *s) {
     if (src >= KEYSRC_COUNT || textfeed_busy()) return;   // the text feed owns the keyboard
+    if (src == KEYSRC_WIRE) {
+        // CBM2 Keyboard via cable: a real keyboard, the user holds the keys himself and
+        // the sender debounces - show the state at once, no queue and no minimum times
+        // (fast enough for games). Other sources keep their hold times.
+        current[src] = *s;
+        if (!holding) {
+            kb_state_t m;
+            merged(&m);
+            matrix_apply(&m);
+        }
+        return;
+    }
     uint8_t next = (uint8_t)((q_head + 1) % QUEUE_LEN);
     if (next == q_tail) q_tail = (uint8_t)((q_tail + 1) % QUEUE_LEN);   // full: drop the oldest
     queue[q_head].src = (uint8_t)src;

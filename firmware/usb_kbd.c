@@ -1,5 +1,5 @@
 // Pico64 Keyboard – USB device: serial console (CDC, used by stdio) + boot keyboard (HID)
-// Copyright (c) 2026 Martin Oswald (do2mad, 1mhz.de) - SPDX-License-Identifier: MIT
+// Copyright (c) 2026 Martin Oswald (1mhz.de) - SPDX-License-Identifier: MIT
 // Based on the TinyUSB cdc / hid examples (MIT, Ha Thach).
 //
 // C64 mode: only the serial console, with the IDs of the Pico SDK (as before).

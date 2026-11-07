@@ -6,11 +6,17 @@ Pico64 Keyboard. Neueste Version zuerst.
 
 ### Deutsch
 
+- **Platine V2** (`hardware/gerber/pico64-keyboard-gerber-v2.0.zip`): Pico 2 W oben aufgelötet oder mit Leisten gesteckt, 4-polige JST-XH-Buchse J3 für das Kabel zum CBM2 Keyboard, 47 × 68 mm. Stückliste und Fotos in `hardware/`.
+- Doku: Hardware, Protokoll (jetzt mit Kabelprotokoll) und Bauanleitung auch auf Deutsch; Firmware direkt aus dem Browser aufspielen: https://1mhz.de/Pico64/
 - **Platine** im Ordner `hardware/`: Gerber-Dateien v1.1 (ohne Bohrungen an der Steckerkodierung Pin 2, mit Pin-Nummern), Stückliste, Fotos.
+- **Firmware 0.13.1 (getestet, `firmware/bin/pico64.uf2`):** Kabeleingang für den CBM2-Keyboard-Adapter (CBM-II-Tastatur): seriell auf GP17 (Pin 22), 115200 Baud, ganze Tastaturmatrix, ohne Verzögerung direkt an den C64 (gut für Spiele); ohne Daten für 300 ms werden die Tasten losgelassen. Ohne Kabel ändert sich nichts.
 
 ### English
 
+- **PCB V2** (`hardware/gerber/pico64-keyboard-gerber-v2.0.zip`): Pico 2 W on top, soldered or plugged in with headers, 4-pin JST-XH socket J3 for the cable to the CBM2 Keyboard, 47 × 68 mm. Parts list and photos in `hardware/`.
+- Docs: hardware, protocol (now with the cable protocol) and build guide also in German; flash the firmware straight from the browser: https://1mhz.de/Pico64/
 - **PCB** in the folder `hardware/`: Gerber files v1.1 (no holes at the connector key pin 2, pin numbers added), parts list, photos.
+- **Firmware 0.13.1 (tested, `firmware/bin/pico64.uf2`):** cable input for the CBM2 Keyboard adapter (CBM-II keyboard): serial on GP17 (pin 22), 115200 baud, full keyboard matrix, passed to the C64 without delay (good for games); keys are released after 300 ms without data. Nothing changes without a cable.
 
 ## v0.12.0 – 2026-10-15
 

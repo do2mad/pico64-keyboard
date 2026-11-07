@@ -2,7 +2,7 @@
 
 The hardware design of Pico64 Keyboard – the schematic and wiring diagram
 (`docs/wiring.png`), the parts list and all files in `hardware/` (Gerber files, parts list, photos) –
-is © 2026 Martin Oswald (do2mad, https://1mhz.de) and licensed under the
+is © 2026 Martin Oswald (https://1mhz.de) and licensed under the
 
 **Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (CC BY-NC-SA 4.0)**
 

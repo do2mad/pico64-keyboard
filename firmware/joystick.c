@@ -1,5 +1,5 @@
 // Pico64 Keyboard – joystick ports 1 and 2 from Bluetooth gamepads
-// Copyright (c) 2026 Martin Oswald (do2mad, 1mhz.de) - SPDX-License-Identifier: MIT
+// Copyright (c) 2026 Martin Oswald (1mhz.de) - SPDX-License-Identifier: MIT
 //
 // Joystick states bypass the key queue - games read the joystick every frame
 // and want it immediately. Only one thing is added: every direction or fire

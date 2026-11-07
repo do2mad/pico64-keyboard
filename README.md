@@ -29,24 +29,29 @@ The original keyboard and both joysticks keep working.
 - **Bluetooth gamepads** (8BitDo, Xbox, PlayStation, Switch and many more, via
   [Bluepad32](https://github.com/ricardoquesada/bluepad32)) as **joystick in port 1 or 2**
 - App, keyboard and gamepads can be used at the same time; **two app devices** (e.g. iPhone and iPad) at once
+- **CBM-II keyboard** by cable or Bluetooth with the [CBM2 Keyboard](https://github.com/do2mad/cbm2-keyboard) adapter (from 0.13.1, socket J3 on the V2 PCB)
+- USB keyboard without a C64: the real C64 keyboard on a Mac, PC or MiSTer
 - USB console: every line you type in a terminal is typed on the C64, plus a key log for debugging
 - Powered by the C64, no extra power supply
 
 ## Status
 
-**v0.12.0 – working.** Tested on a breadbin C64 with an iPhone and an Android phone,
-first on perfboard, now on its own **PCB** (Gerber files, parts list and photos in
-[hardware/](hardware/)). Bluetooth keyboard and gamepad support still needs testing with more devices.
+**v0.13.1 – working.** Tested on a breadbin C64 with an iPhone and an Android phone, Bluetooth
+keyboards, gamepads and the CBM2 Keyboard. Two **PCBs** (Gerber files, parts lists and photos in
+[hardware/](hardware/)): **V2** with the Pico on top (soldered or plugged in) and the socket for the
+CBM2 Keyboard, and the older **V1** with the Pico soldered into a cut-out. Bluetooth keyboard and
+gamepad support still needs testing with more devices.
 
 > **Hardware change in v0.10:** all 17 resistors are now 100 Ω (PA0–PA7 were 1 kΩ). Joystick
 > port 2 needs this – everything else also works with the old values. See [docs/HARDWARE.md](docs/HARDWARE.md).
 
 ## Getting started
 
-1. **Build the adapter** – PCB (Gerber files, parts list): [hardware/](hardware/); wiring and safety
+1. **Build the adapter** – PCB V2 or V1 (Gerber files, parts lists): [hardware/](hardware/); wiring and safety
    notes, also for perfboard: [docs/HARDWARE.md](docs/HARDWARE.md).
    Check the CN1 pinout of your C64 with a multimeter before soldering.
-2. **Flash the firmware** – hold BOOTSEL, plug the Pico into your computer, drag
+2. **Flash the firmware** – easiest on the [flash page](https://1mhz.de/Pico64/) straight from Chrome
+   or Edge. Or: hold BOOTSEL, plug the Pico into your computer, drag
    `pico64-keyboard-vX.Y.Z.uf2` from the [latest release](https://github.com/do2mad/pico64-keyboard/releases/latest)
    onto the `RP2350` drive. Do this with the Pico **out of the C64** or with the C64 switched off.
 3. **Plug it in** between CN1 and the keyboard cable, switch the C64 on – the Pico LED blinks
@@ -56,7 +61,7 @@ first on perfboard, now on its own **PCB** (Gerber files, parts list and photos 
 5. **Or pair a Bluetooth keyboard / gamepad** – see below.
 
 Building the firmware yourself: [docs/BUILDING.md](docs/BUILDING.md).
-Bluetooth protocol: [docs/PROTOCOL.md](docs/PROTOCOL.md).
+Bluetooth and cable protocol: [docs/PROTOCOL.md](docs/PROTOCOL.md).
 
 ## Bluetooth keyboard and gamepad
 
@@ -163,6 +168,8 @@ terminal with 115200 baud, e.g. `screen /dev/tty.usbmodem* 115200` on a Mac.
 ## Related projects
 
 - [Blue-64 Keyboard](https://github.com/do2mad/blue64-keyboard-ios) – the app (iPhone and Android)
+- [CBM2 Keyboard](https://github.com/do2mad/cbm2-keyboard) – a CBM-II keyboard (500/600/700) on the C64,
+  connected to the Pico64 by cable or Bluetooth
 - [Pico USB Keyboard](https://github.com/do2mad/pico-usb-keyboard) – the same app as a USB keyboard:
   a plain Pico 2 W without wiring, for the MiSTer C64 core, PC, Mac or Raspberry Pi
 - [BT-64 with BLE keyboard service](https://github.com/do2mad/BT-64/tree/ble-keyboard) – the
@@ -176,7 +183,7 @@ Bug reports and feature requests are also welcome as a GitHub issue.
 
 ## Credits & license
 
-- Firmware © 2026 Martin Oswald (do2mad) – [1mhz.de](https://1mhz.de), [MIT License](LICENSE)
+- Firmware © 2026 Martin Oswald – [1mhz.de](https://1mhz.de), [MIT License](LICENSE)
 - Hardware (schematic, PCB) © 2026 Martin Oswald,
   [CC BY-NC-SA 4.0](LICENSE-HARDWARE.md) – non-commercial use
 - Uses the Raspberry Pi Pico SDK, BTstack, the CYW43 driver and

@@ -1,5 +1,5 @@
 // Pico64 Keyboard – text feed: types text in BT-64 macro syntax
-// Copyright (c) 2026 Martin Oswald (do2mad, 1mhz.de) - SPDX-License-Identifier: MIT
+// Copyright (c) 2026 Martin Oswald (1mhz.de) - SPDX-License-Identifier: MIT
 #ifndef PICO64_TEXTFEED_H
 #define PICO64_TEXTFEED_H
 

@@ -1,5 +1,5 @@
 // Pico64 Keyboard – C64 keyboard matrix adapter with Raspberry Pi Pico 2 W
-// Copyright (c) 2026 Martin Oswald (do2mad, 1mhz.de) - SPDX-License-Identifier: MIT
+// Copyright (c) 2026 Martin Oswald (1mhz.de) - SPDX-License-Identifier: MIT
 //
 // Core 1: emulates the C64 keyboard matrix and the joystick lines (matrix.c)
 // Core 0: Bluetooth (BTstack + Bluepad32): app service, Bluetooth keyboards and
@@ -35,8 +35,9 @@
 #include "textfeed.h"
 #include "usb_kbd.h"
 #include "usb_mode.h"
+#include "wire.h"
 
-#define PICO64_VERSION  "0.12.0"
+#define PICO64_VERSION  "0.13.1"
 #define CONSOLE_POLL_MS 20
 
 static btstack_timer_source_t console_timer;
@@ -113,6 +114,7 @@ int main(void) {
 
     keys_init();
     joystick_init();
+    wire_init();                 // CBM2 Keyboard via cable (GP17)
 
     console_timer.process = &console_poll;
     btstack_run_loop_set_timer(&console_timer, CONSOLE_POLL_MS);

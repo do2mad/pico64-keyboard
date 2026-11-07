@@ -1,5 +1,5 @@
 // Pico64 Keyboard – key scheduler: merges all key sources and feeds the matrix
-// Copyright (c) 2026 Martin Oswald (do2mad, 1mhz.de) - SPDX-License-Identifier: MIT
+// Copyright (c) 2026 Martin Oswald (1mhz.de) - SPDX-License-Identifier: MIT
 #ifndef PICO64_KEYS_H
 #define PICO64_KEYS_H
 
@@ -13,6 +13,7 @@ typedef enum {
     KEYSRC_APP2,         // second app connected at the same time
     KEYSRC_BTKBD,        // Bluetooth keyboard(s)
     KEYSRC_PAD,          // gamepad buttons mapped to keys (SPACE, RETURN, F1, RUN/STOP)
+    KEYSRC_WIRE,         // CBM2 Keyboard adapter via cable (wire.c)
     KEYSRC_COUNT
 } keysrc_t;
 

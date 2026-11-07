@@ -1,7 +1,10 @@
 # Building the firmware
 
+*Deutsche Version: [BUILDING.de.md](BUILDING.de.md)*
+
 You only need this if you want to change the firmware – a ready-to-flash `.uf2` is attached to
-every [release](https://github.com/do2mad/pico64-keyboard/releases).
+every [release](https://github.com/do2mad/pico64-keyboard/releases), and the
+[flash page](https://1mhz.de/Pico64/) installs it straight from the browser.
 
 Requirements: CMake, Ninja (or Make), the Arm GNU toolchain (`arm-none-eabi-gcc`) and the
 **Raspberry Pi Pico SDK 2.2.0** with the `cyw43-driver` and `btstack` submodules, and git.
@@ -27,14 +30,18 @@ Alternatively use the "Raspberry Pi Pico" extension for VS Code, which installs 
 | File | Content |
 |---|---|
 | `matrix.c/.h` | pin assignment, core 1 loop (runs from RAM), lookup tables, open-drain outputs, joystick lines |
-| `keys.c/.h` | key scheduler: merges app, keyboards and gamepad buttons, hold times, key log |
+| `keys.c/.h` | key scheduler: merges app, keyboards, gamepad buttons and the cable input, hold times, key log |
 | `ble_service.c/.h` | BLE service for the app (GATT, advertising), LED |
 | `input_bt.c/.h` | Bluepad32 platform: Bluetooth keyboards and gamepads, port assignment |
 | `keymap.c/.h` | HID keyboard → C64 keys (symbolic German / positional) |
 | `joystick.c/.h` | joystick ports 1 and 2, minimum hold time |
 | `textfeed.c/.h` | types text in BT-64 macro syntax (`~ret~`, `~clr~`, `~f1~` …) |
-| `main.c` | start-up, USB console |
+| `wire.c/.h` | cable input from the CBM2 Keyboard (UART on GP17) |
+| `usb_kbd.c/.h` | USB device: serial console (CDC) and keyboard (HID) |
+| `usb_mode.c/.h` | USB keyboard mode without a C64: scans the real C64 keyboard |
+| `main.c` | start-up, mode detection, USB console |
 | `pico64.gatt` | GATT database (compiled into `pico64.h` by the build) |
 | `btstack_config.h` | BTstack configuration (Classic + LE, from the Bluepad32 example) |
 | `sdkconfig.h` | Bluepad32 configuration |
+| `tusb_config.h` | TinyUSB configuration |
 | `CMakeLists.txt` | build for `PICO_BOARD=pico2_w`, fetches Bluepad32 |

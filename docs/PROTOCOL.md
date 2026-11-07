@@ -1,3 +1,7 @@
+# Protocols
+
+*Deutsche Version: [PROTOCOL.de.md](PROTOCOL.de.md)*
+
 # Bluetooth LE protocol
 
 Pico64 Keyboard implements the **BT-64 BLE keyboard protocol v1** (the same service the
@@ -67,3 +71,17 @@ Read returns `[protocol version, status, capabilities]`:
 - After connecting, the Pico asks for a connection interval of 15–30 ms (within Apple's
   accessory guidelines), so key presses arrive quickly on iOS as well.
 - All keys are released when the client disconnects; advertising restarts automatically.
+
+# Cable input (CBM2 Keyboard)
+
+From firmware 0.13.1 the [CBM2 Keyboard](https://github.com/do2mad/cbm2-keyboard) can also be
+connected by cable (socket J3 on the V2 PCB, wiring in [HARDWARE.md](HARDWARE.md)).
+
+- **UART:** GP17 (pin 22) = UART0 RX with pull-up, **115200 baud 8N1**. Without a cable nothing happens.
+- **Frame** (11 bytes): `0xC6 0x4B flags col0 … col7 check`
+  - `flags`, `colN`: as in the matrix characteristic (bit 3 of `flags` = RESTORE)
+  - `check` = XOR of `flags` and `col0` … `col7`, XOR `0x5A`
+- The sender sends on every change and repeats the state every **100 ms**. Without a valid frame for
+  **300 ms** the keys of this source are released.
+- The keys go **straight to the matrix** – no queue and no minimum hold times, like a real
+  keyboard. Latency is about 3–5 ms, fast enough for games.

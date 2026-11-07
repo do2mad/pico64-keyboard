@@ -47,6 +47,7 @@ add_executable(pico64
     textfeed.c
     usb_kbd.c
     usb_mode.c
+    wire.c
 )
 
 target_include_directories(pico64 PRIVATE ${CMAKE_CURRENT_LIST_DIR})
@@ -62,6 +63,7 @@ target_link_libraries(pico64
     bluepad32
     tinyusb_device       # USB console + USB keyboard mode (usb_kbd.c)
     pico_unique_id
+    hardware_uart
 )
 
 pico_btstack_make_gatt_header(pico64 PRIVATE "${CMAKE_CURRENT_LIST_DIR}/pico64.gatt")

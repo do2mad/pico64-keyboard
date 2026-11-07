@@ -1,5 +1,7 @@
 # Hardware
 
+*Deutsche Version: [HARDWARE.de.md](HARDWARE.de.md)*
+
 ## How it works
 
 The C64 scans its keyboard through CIA 1:
@@ -15,7 +17,8 @@ The Pico does exactly what the key switches would do:
   150 MHz, code in RAM). The C64 reads several microseconds later.
 - **Core 0** runs Bluetooth (BTstack + Bluepad32): the app service, Bluetooth keyboards and
   gamepads. It holds every key change long enough for the KERNAL (which scans every 1/60 s) and
-  rebuilds the table on every change. It also runs the text feed and the USB console.
+  rebuilds the table on every change. It also runs the text feed, the USB console and the cable
+  input for the CBM2 Keyboard.
 
 **Joysticks** use the same lines: port 1 = PB0–PB4, port 2 = PA0–PA4 (up, down, left, right,
 fire), a real joystick simply shorts them to GND. Gamepad port 1 is ORed into every table entry;
@@ -27,9 +30,9 @@ Because the table covers **every** column pattern, programs that select several 
 ### The one rule
 
 All C64 lines are **only pulled to GND or released** (open drain): PB0–PB7 and RESTORE for keys
-and joystick 1, PA0–PA4 for joystick 2. The Pico never drives any of them high. That keeps it compatible with the real keyboard, the joystick ports (which share
-these lines) and the CIA – and no current flows into the C64 when the C64 is off and the Pico is
-powered via USB.
+and joystick 1, PA0–PA4 for joystick 2. The Pico never drives any of them high. That keeps it
+compatible with the real keyboard, the joystick ports (which share these lines) and the CIA – and
+no current flows into the C64 when the C64 is off and the Pico is powered via USB.
 
 ## Why the Pico 2 W
 
@@ -72,6 +75,21 @@ CN1 pinout after Ruud Baltissen ("Commodore 64 keyboard connector and keyboard m
 **Check it with a multimeter before soldering** – GND (1), +5 V (4) and RESTORE (3) are easy to
 verify, PA/PB by continuity to CIA 1 (pins 2–9 = PA0–PA7, 10–17 = PB0–PB7).
 
+### Cable to the CBM2 Keyboard (V2 PCB, J3)
+
+The [CBM2 Keyboard](https://github.com/do2mad/cbm2-keyboard) (a CBM-II keyboard on the C64) can be
+connected with a 4-pin JST-XH cable, wired 1:1:
+
+| J3 | Pico64 | CBM2 Keyboard |
+|---|---|---|
+| 1 | GP17 (pin 22), UART0 RX, pull-up | GP28 through 330 Ω – data, 115200 baud |
+| 2 | GND | GP22 – cable detect |
+| 3 | VSYS (after D1) | → 1N5817 → VSYS – power from the C64 |
+| 4 | GND | GND |
+
+Protocol: see [PROTOCOL.md](PROTOCOL.md#cable-input-cbm2-keyboard). Firmware 0.13.1 or newer.
+On a perfboard adapter you can add the same socket.
+
 ### Why these resistors
 
 All 17 resistors are **100 Ω**.
@@ -103,7 +121,8 @@ powering it from the C64 guarantees that.
 | 1 | Schottky diode 1N5817 (or BAT54 SMD) | |
 | 1 | Female header 1 × 20, 2.54 mm | goes onto CN1 on the mainboard |
 | 1 | Male header 1 × 20, 2.54 mm | for the keyboard cable plug |
-| 1 | Perfboard or small PCB | |
+| 1 | JST-XH socket 4-pin (optional) | cable to the CBM2 Keyboard |
+| 1 | PCB (see below) or perfboard | |
 
 Material cost roughly 10–15 €.
 
@@ -114,8 +133,11 @@ header above it takes the keyboard cable plug, all 20 lines are connected 1:1. T
 lines through the resistors. Mind the key pin (pin 2) so the keyboard cable cannot be plugged in
 the wrong way round.
 
-There is a **PCB** with the Pico soldered flat into a cut-out, so the adapter fits under the case
-top – Gerber files, parts list and photos in [../hardware/](../hardware/).
+There are two **PCBs** – Gerber files, parts lists and photos in [../hardware/](../hardware/):
+
+- **V2** (current): the Pico sits on top, soldered directly or plugged in with headers, plus the
+  JST-XH socket J3 for the CBM2 Keyboard. 47 × 68 mm.
+- **V1**: the Pico is soldered flat into a cut-out, so the adapter fits under the case top. 53 × 68 mm.
 
 ## Test plan
 
@@ -130,7 +152,9 @@ top – Gerber files, parts list and photos in [../hardware/](../hardware/).
 6. **Joysticks:** joysticks in port 1 and 2 keep working, also while the app is connected.
 7. **Bluetooth keyboard / gamepad:** pair them (see the README), type, play a game on port 2,
    swap the gamepad to port 1 with L1 + R1.
-8. **Games:** a few games with keyboard control, including ones that scan several columns at once.
+8. **CBM2 Keyboard (V2):** plug in the cable, the CBM2 Keyboard's LED flashes every 4 s,
+   C= + F10 on the CBM-II keyboard types its version.
+9. **Games:** a few games with keyboard control, including ones that scan several columns at once.
 
 ## Known limitations / ideas
 

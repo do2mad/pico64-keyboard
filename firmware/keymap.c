@@ -1,5 +1,5 @@
 // Pico64 Keyboard – Bluetooth (HID) keyboard to C64 matrix mapping
-// Copyright (c) 2026 Martin Oswald (do2mad, 1mhz.de) - SPDX-License-Identifier: MIT
+// Copyright (c) 2026 Martin Oswald (1mhz.de) - SPDX-License-Identifier: MIT
 //
 // Two modes (F10 switches):
 //

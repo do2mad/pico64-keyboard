@@ -1,0 +1,6 @@
+"Refs","Value","Footprint","Qty"
+"D1","1N5817","Diode_THT:D_DO-41_SOD81_P7.62mm_Horizontal","1"
+"J1,J2","Conn_01x20","Connector_PinHeader_2.54mm:PinHeader_1x20_P2.54mm_Vertical","2"
+"J3","Conn_01x04 (JST-XH B4B-XH-A)","Connector_JST:JST_XH_B4B-XH-A_1x04_P2.50mm_Vertical","1"
+"R1-R17","100","Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal","17"
+"U1","Raspberry Pi Pico 2 W","Module:RaspberryPi_Pico_Common_Unspecified","1"

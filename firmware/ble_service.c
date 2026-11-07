@@ -1,5 +1,5 @@
 // Pico64 Keyboard – BLE keyboard service (compatible with the BT-64 BLE keyboard service v1)
-// Copyright (c) 2026 Martin Oswald (do2mad, 1mhz.de) - SPDX-License-Identifier: MIT
+// Copyright (c) 2026 Martin Oswald (1mhz.de) - SPDX-License-Identifier: MIT
 //
 // Everything here runs in the BTstack context (single threaded). Key states
 // from the app go to the key scheduler (keys.c), which holds every state long

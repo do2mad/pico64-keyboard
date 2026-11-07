@@ -1,5 +1,5 @@
 // Pico64 Keyboard – C64 keyboard matrix and joystick emulation (core 1)
-// Copyright (c) 2026 Martin Oswald (do2mad, 1mhz.de) - SPDX-License-Identifier: MIT
+// Copyright (c) 2026 Martin Oswald (1mhz.de) - SPDX-License-Identifier: MIT
 #ifndef PICO64_MATRIX_H
 #define PICO64_MATRIX_H
 

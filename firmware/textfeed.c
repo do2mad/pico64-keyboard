@@ -1,5 +1,5 @@
 // Pico64 Keyboard – text feed: types text in BT-64 macro syntax
-// Copyright (c) 2026 Martin Oswald (do2mad, 1mhz.de) - SPDX-License-Identifier: MIT
+// Copyright (c) 2026 Martin Oswald (1mhz.de) - SPDX-License-Identifier: MIT
 //
 // Syntax (compatible with the BT-64 macro feed):
 //   lower-case letters  -> key unshifted  (upper case on the C64 default charset)

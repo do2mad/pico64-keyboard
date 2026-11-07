@@ -1,5 +1,5 @@
 // Pico64 Keyboard – Bluetooth keyboards and gamepads (Bluepad32)
-// Copyright (c) 2026 Martin Oswald (do2mad, 1mhz.de) - SPDX-License-Identifier: MIT
+// Copyright (c) 2026 Martin Oswald (1mhz.de) - SPDX-License-Identifier: MIT
 //
 // Bluepad32 (https://github.com/ricardoquesada/bluepad32, Apache-2.0) connects
 // Bluetooth Classic and BLE keyboards and gamepads. This file is the Bluepad32

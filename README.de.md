@@ -29,24 +29,30 @@ Originaltastatur und Joysticks funktionieren weiter.
 - **Bluetooth-Gamepads** (8BitDo, Xbox, PlayStation, Switch und viele mehr, über
   [Bluepad32](https://github.com/ricardoquesada/bluepad32)) als **Joystick in Port 1 oder 2**
 - App, Tastatur und Gamepads gleichzeitig nutzbar; **zwei App-Geräte** (z. B. iPhone und iPad) zugleich
+- **CBM-II-Tastatur** per Kabel oder Bluetooth mit dem Adapter [CBM2 Keyboard](https://github.com/do2mad/cbm2-keyboard) (ab 0.13.1, Buchse J3 auf der Platine V2)
+- USB-Tastatur ohne C64: die echte C64-Tastatur am Mac, PC oder MiSTer
 - USB-Konsole: jede im Terminal eingegebene Zeile wird auf dem C64 getippt, dazu ein Tasten-Protokoll zur Fehlersuche
 - Stromversorgung aus dem C64
 
 ## Stand
 
-**v0.12.0 – funktioniert.** An einem Brotkasten-C64 mit iPhone und Android-Handy getestet,
-zuerst auf Lochraster, jetzt auf einer eigenen **Platine** (Gerber-Dateien, Stückliste und Fotos in
-[hardware/](hardware/)). Bluetooth-Tastatur und -Gamepad müssen noch mit mehr Geräten getestet werden.
+**v0.13.1 – funktioniert.** An einem Brotkasten-C64 mit iPhone und Android-Handy,
+Bluetooth-Tastaturen, Gamepads und dem CBM2 Keyboard getestet. Zwei **Platinen** (Gerber-Dateien,
+Stücklisten und Fotos in [hardware/](hardware/README.de.md)): **V2** mit dem Pico oben drauf
+(aufgelötet oder gesteckt) und der Buchse für das CBM2 Keyboard, dazu die ältere **V1** mit dem
+in eine Aussparung gelöteten Pico. Bluetooth-Tastatur und -Gamepad müssen noch mit mehr Geräten
+getestet werden.
 
 > **Hardware-Änderung in v0.10:** alle 17 Widerstände sind jetzt 100 Ω (PA0–PA7 waren 1 kΩ).
-> Joystick-Port 2 braucht das – alles andere geht auch mit den alten Werten. Siehe [docs/HARDWARE.md](docs/HARDWARE.md).
+> Joystick-Port 2 braucht das – alles andere geht auch mit den alten Werten. Siehe [docs/HARDWARE.de.md](docs/HARDWARE.de.md).
 
 ## Loslegen
 
-1. **Adapter bauen** – Platine (Gerber-Dateien, Stückliste): [hardware/](hardware/); Verdrahtung und
-   Sicherheitshinweise, auch für Lochraster: [docs/HARDWARE.md](docs/HARDWARE.md) (englisch).
+1. **Adapter bauen** – Platine V2 oder V1 (Gerber-Dateien, Stücklisten): [hardware/](hardware/README.de.md);
+   Verdrahtung und Sicherheitshinweise, auch für Lochraster: [docs/HARDWARE.de.md](docs/HARDWARE.de.md).
    Die Belegung von CN1 am eigenen C64 vor dem Löten mit dem Multimeter prüfen.
-2. **Firmware aufspielen** – BOOTSEL gedrückt halten, Pico per USB an den Rechner, die Datei
+2. **Firmware aufspielen** – am einfachsten auf der [Flash-Seite](https://1mhz.de/Pico64/) direkt aus
+   Chrome oder Edge. Oder: BOOTSEL gedrückt halten, Pico per USB an den Rechner, die Datei
    `pico64-keyboard-vX.Y.Z.uf2` aus dem [neuesten Release](https://github.com/do2mad/pico64-keyboard/releases/latest)
    auf das Laufwerk `RP2350` ziehen. Dabei den Pico **nicht** im laufenden C64 stecken lassen.
 3. **Einstecken** zwischen CN1 und Tastaturkabel, C64 einschalten – die LED am Pico blinkt
@@ -55,7 +61,7 @@ zuerst auf Lochraster, jetzt auf einer eigenen **Platine** (Gerber-Dateien, Stü
    findet den Pico selbst, die LED leuchtet dauerhaft, solange verbunden.
 5. **Oder Bluetooth-Tastatur / Gamepad koppeln** – siehe unten.
 
-Firmware selbst bauen: [docs/BUILDING.md](docs/BUILDING.md). Bluetooth-Protokoll: [docs/PROTOCOL.md](docs/PROTOCOL.md).
+Firmware selbst bauen: [docs/BUILDING.de.md](docs/BUILDING.de.md). Bluetooth- und Kabelprotokoll: [docs/PROTOCOL.de.md](docs/PROTOCOL.de.md).
 
 ## Bluetooth-Tastatur und Gamepad
 
@@ -163,6 +169,8 @@ Terminal mit 115200 Baud öffnen, z. B. auf dem Mac `screen /dev/tty.usbmodem* 1
 ## Verwandte Projekte
 
 - [Blue-64 Keyboard](https://github.com/do2mad/blue64-keyboard-ios) – die App (iPhone und Android)
+- [CBM2 Keyboard](https://github.com/do2mad/cbm2-keyboard) – eine CBM-II-Tastatur (500/600/700) am C64,
+  per Kabel oder Bluetooth mit dem Pico64 verbunden
 - [Pico USB Keyboard](https://github.com/do2mad/pico-usb-keyboard) – dieselbe App als USB-Tastatur:
   ein Pico 2 W ohne Verkabelung, für den C64-Core des MiSTer, PC, Mac oder Raspberry Pi
 - [BT-64 mit BLE-Tastaturdienst](https://github.com/do2mad/BT-64/tree/ble-keyboard) – die
@@ -176,7 +184,7 @@ Fehlerberichte und Wünsche gern auch als GitHub-Issue.
 
 ## Dank und Lizenz
 
-- Firmware © 2026 Martin Oswald (do2mad) – [1mhz.de](https://1mhz.de), [MIT-Lizenz](LICENSE)
+- Firmware © 2026 Martin Oswald – [1mhz.de](https://1mhz.de), [MIT-Lizenz](LICENSE)
 - Hardware (Schaltplan, Platine) © 2026 Martin Oswald, [CC BY-NC-SA 4.0](LICENSE-HARDWARE.md) – nicht-kommerziell
 - Nutzt Raspberry Pi Pico SDK, BTstack, den CYW43-Treiber und
   [Bluepad32](https://github.com/ricardoquesada/bluepad32) von Ricardo Quesada – siehe [NOTICE](NOTICE)
