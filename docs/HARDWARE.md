@@ -133,11 +133,9 @@ header above it takes the keyboard cable plug, all 20 lines are connected 1:1. T
 lines through the resistors. Mind the key pin (pin 2) so the keyboard cable cannot be plugged in
 the wrong way round.
 
-There are two **PCBs** – Gerber files, parts lists and photos in [../hardware/](../hardware/):
-
-- **V2** (current): the Pico sits on top, soldered directly or plugged in with headers, plus the
-  JST-XH socket J3 for the CBM2 Keyboard. 47 × 68 mm.
-- **V1**: the Pico is soldered flat into a cut-out, so the adapter fits under the case top. 53 × 68 mm.
+There is a **PCB** (V2) – KiCad project, Gerber files, parts list and photos in [../hardware/](../hardware/):
+the Pico sits on top, soldered directly or plugged in with headers, plus the JST-XH socket J3 for
+the CBM2 Keyboard. 47 × 68 mm.
 
 ## Test plan
 

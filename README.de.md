@@ -37,18 +37,17 @@ Originaltastatur und Joysticks funktionieren weiter.
 ## Stand
 
 **v0.13.1 – funktioniert.** An einem Brotkasten-C64 mit iPhone und Android-Handy,
-Bluetooth-Tastaturen, Gamepads und dem CBM2 Keyboard getestet. Zwei **Platinen** (Gerber-Dateien,
-Stücklisten und Fotos in [hardware/](hardware/README.de.md)): **V2** mit dem Pico oben drauf
-(aufgelötet oder gesteckt) und der Buchse für das CBM2 Keyboard, dazu die ältere **V1** mit dem
-in eine Aussparung gelöteten Pico. Bluetooth-Tastatur und -Gamepad müssen noch mit mehr Geräten
-getestet werden.
+Bluetooth-Tastaturen, Gamepads und dem CBM2 Keyboard getestet. **Platine V2** mit dem Pico oben
+drauf (aufgelötet oder gesteckt) und der Buchse für das CBM2 Keyboard – KiCad-Projekt,
+Gerber-Dateien, Stückliste und Fotos in [hardware/](hardware/README.de.md). Bluetooth-Tastatur und
+-Gamepad müssen noch mit mehr Geräten getestet werden.
 
 > **Hardware-Änderung in v0.10:** alle 17 Widerstände sind jetzt 100 Ω (PA0–PA7 waren 1 kΩ).
 > Joystick-Port 2 braucht das – alles andere geht auch mit den alten Werten. Siehe [docs/HARDWARE.de.md](docs/HARDWARE.de.md).
 
 ## Loslegen
 
-1. **Adapter bauen** – Platine V2 oder V1 (Gerber-Dateien, Stücklisten): [hardware/](hardware/README.de.md);
+1. **Adapter bauen** – Platine (KiCad-Projekt, Gerber-Dateien, Stückliste): [hardware/](hardware/README.de.md);
    Verdrahtung und Sicherheitshinweise, auch für Lochraster: [docs/HARDWARE.de.md](docs/HARDWARE.de.md).
    Die Belegung von CN1 am eigenen C64 vor dem Löten mit dem Multimeter prüfen.
 2. **Firmware aufspielen** – am einfachsten auf der [Flash-Seite](https://1mhz.de/Pico64/) direkt aus
@@ -185,7 +184,7 @@ Fehlerberichte und Wünsche gern auch als GitHub-Issue.
 ## Dank und Lizenz
 
 - Firmware © 2026 Martin Oswald – [1mhz.de](https://1mhz.de), [MIT-Lizenz](LICENSE)
-- Hardware (Schaltplan, Platine) © 2026 Martin Oswald, [CC BY-NC-SA 4.0](LICENSE-HARDWARE.md) – nicht-kommerziell
+- Hardware (Schaltplan, Platine) © 2026 Martin Oswald, [CC BY-SA 4.0](LICENSE-HARDWARE.md) – offene Hardware
 - Nutzt Raspberry Pi Pico SDK, BTstack, den CYW43-Treiber und
   [Bluepad32](https://github.com/ricardoquesada/bluepad32) von Ricardo Quesada – siehe [NOTICE](NOTICE)
 - Der Bluetooth-Dienst folgt dem Protokoll der BLE-Tastatur-Erweiterung für

@@ -37,17 +37,16 @@ The original keyboard and both joysticks keep working.
 ## Status
 
 **v0.13.1 – working.** Tested on a breadbin C64 with an iPhone and an Android phone, Bluetooth
-keyboards, gamepads and the CBM2 Keyboard. Two **PCBs** (Gerber files, parts lists and photos in
-[hardware/](hardware/)): **V2** with the Pico on top (soldered or plugged in) and the socket for the
-CBM2 Keyboard, and the older **V1** with the Pico soldered into a cut-out. Bluetooth keyboard and
-gamepad support still needs testing with more devices.
+keyboards, gamepads and the CBM2 Keyboard. **PCB V2** with the Pico on top (soldered or plugged in)
+and the socket for the CBM2 Keyboard – KiCad project, Gerber files, parts list and photos in
+[hardware/](hardware/). Bluetooth keyboard and gamepad support still needs testing with more devices.
 
 > **Hardware change in v0.10:** all 17 resistors are now 100 Ω (PA0–PA7 were 1 kΩ). Joystick
 > port 2 needs this – everything else also works with the old values. See [docs/HARDWARE.md](docs/HARDWARE.md).
 
 ## Getting started
 
-1. **Build the adapter** – PCB V2 or V1 (Gerber files, parts lists): [hardware/](hardware/); wiring and safety
+1. **Build the adapter** – PCB (KiCad project, Gerber files, parts list): [hardware/](hardware/); wiring and safety
    notes, also for perfboard: [docs/HARDWARE.md](docs/HARDWARE.md).
    Check the CN1 pinout of your C64 with a multimeter before soldering.
 2. **Flash the firmware** – easiest on the [flash page](https://1mhz.de/Pico64/) straight from Chrome
@@ -185,7 +184,7 @@ Bug reports and feature requests are also welcome as a GitHub issue.
 
 - Firmware © 2026 Martin Oswald – [1mhz.de](https://1mhz.de), [MIT License](LICENSE)
 - Hardware (schematic, PCB) © 2026 Martin Oswald,
-  [CC BY-NC-SA 4.0](LICENSE-HARDWARE.md) – non-commercial use
+  [CC BY-SA 4.0](LICENSE-HARDWARE.md) – open hardware
 - Uses the Raspberry Pi Pico SDK, BTstack, the CYW43 driver and
   [Bluepad32](https://github.com/ricardoquesada/bluepad32) by Ricardo Quesada – see [NOTICE](NOTICE)
 - The Bluetooth service follows the protocol of the BLE keyboard extension for

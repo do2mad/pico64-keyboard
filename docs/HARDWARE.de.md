@@ -136,12 +136,9 @@ Stiftleiste darüber nimmt den Stecker des Tastaturkabels auf, alle 20 Leitungen
 Der Pico greift die Leitungen über die Widerstände ab. Auf den Kodierplatz (Pin 2) achten, damit
 das Tastaturkabel nicht verkehrt herum aufgesteckt werden kann.
 
-Es gibt zwei **Platinen** – Gerber-Dateien, Stücklisten und Fotos in [../hardware/](../hardware/README.de.md):
-
-- **V2** (aktuell): Der Pico sitzt oben auf, direkt aufgelötet oder mit Leisten gesteckt, dazu die
-  JST-XH-Buchse J3 für das CBM2 Keyboard. 47 × 68 mm.
-- **V1**: Der Pico wird flach in eine Aussparung gelötet, so passt der Adapter unter das
-  Gehäuseoberteil. 53 × 68 mm.
+Es gibt eine **Platine** (V2) – KiCad-Projekt, Gerber-Dateien, Stückliste und Fotos in
+[../hardware/](../hardware/README.de.md): Der Pico sitzt oben auf, direkt aufgelötet oder mit
+Leisten gesteckt, dazu die JST-XH-Buchse J3 für das CBM2 Keyboard. 47 × 68 mm.
 
 ## Testplan
 
